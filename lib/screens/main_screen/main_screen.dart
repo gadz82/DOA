@@ -28,7 +28,6 @@ class _MainScreenState extends State<MainScreen> {
           onPageChanged: onPageChanged,
           children: <Widget>[
             Browse(),
-            Share(),
             Settings(),
           ],
         ),
@@ -42,10 +41,6 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(
               icon: Icon(Feather.folder),
               label: "Browse",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Feather.share_2),
-              label: "FTP",
             ),
             BottomNavigationBarItem(
               icon: Icon(Feather.settings),

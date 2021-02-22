@@ -1,3 +1,4 @@
+import 'dart:developer' as dev;
 import 'dart:io';
 import 'dart:math';
 
@@ -49,6 +50,7 @@ class FileUtils {
     List<Directory> storages = await getStorageList();
     List<FileSystemEntity> files = List<FileSystemEntity>();
     for (Directory dir in storages) {
+
       List<FileSystemEntity> allFilesInPath = List();
       // This is important to catch sotrage errors
       try {

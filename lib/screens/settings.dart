@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:device_info/device_info.dart';
@@ -8,12 +9,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/category_provider.dart';
+
 class Settings extends StatefulWidget {
   @override
   _SettingsState createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
+
+  bool isLogged = false;
+
+  String password;
+
+  final pwdController = TextEditingController();
+
+  @override
+  void dispose() {
+    pwdController.dispose();
+    super.dispose();
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +50,11 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    if(Provider.of<CategoryProvider>(context).adminMode){
+      this.setState(() {
+        this.isLogged = true;
+      });
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text("Settings"),
@@ -41,7 +63,27 @@ class _SettingsState extends State<Settings> {
         padding: EdgeInsets.symmetric(horizontal: 20),
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
-          SwitchListTile.adaptive(
+          if(!this.isLogged) Column(
+            children: <Widget>[
+              TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                ),
+                controller: pwdController,
+                onChanged: (text) {
+                  if(text == 'tato'){
+                    setState(() {
+                      this.isLogged = true;
+                    });
+                  }
+                },
+              ),
+
+            ],
+          ),
+          if(this.isLogged) SwitchListTile.adaptive(
             contentPadding: EdgeInsets.all(0),
             secondary: Icon(
               Feather.eye_off,
@@ -60,13 +102,51 @@ class _SettingsState extends State<Settings> {
                 .of(context)
                 .accentColor,
           ),
-          Container(
+          if(this.isLogged) Container(
             height: 1,
             color: Theme
                 .of(context)
                 .dividerColor,
           ),
-          MediaQuery
+          if(this.isLogged) SwitchListTile.adaptive(
+            contentPadding: EdgeInsets.all(0),
+            secondary: Icon(
+              Feather.user,
+            ),
+            title: Text(
+              "Admin Mode",
+            ),
+            value: Provider
+                .of<CategoryProvider>(context)
+                .adminMode,
+            onChanged: (value) {
+              Provider.of<CategoryProvider>(context, listen: false)
+                  .setAdminMode(value);
+            },
+            activeColor: Theme
+                .of(context)
+                .accentColor,
+          ),
+          if(this.isLogged) Container(
+            height: 1,
+            color: Theme
+                .of(context)
+                .dividerColor,
+          ),
+          if(this.isLogged) ListTile(
+            contentPadding: EdgeInsets.all(0),
+            leading: Icon(Feather.folder),
+            title: Text(Provider
+                .of<CategoryProvider>(context)
+                .defDir),
+          ),
+          if(this.isLogged) Container(
+            height: 1,
+            color: Theme
+                .of(context)
+                .dividerColor,
+          ),
+          if(this.isLogged) MediaQuery
               .of(context)
               .platformBrightness !=
               ThemeConfig.darkTheme.brightness
@@ -96,7 +176,7 @@ class _SettingsState extends State<Settings> {
                 .accentColor,
           )
               : SizedBox(),
-          MediaQuery
+          if(this.isLogged) MediaQuery
               .of(context)
               .platformBrightness !=
               ThemeConfig.darkTheme.brightness
@@ -107,25 +187,25 @@ class _SettingsState extends State<Settings> {
                 .dividerColor,
           )
               : SizedBox(),
-          ListTile(
+          if(this.isLogged) ListTile(
             contentPadding: EdgeInsets.all(0),
             onTap: () => showLicensePage(context: context),
             leading: Icon(Feather.file_text),
             title: Text("Open source licences"),
           ),
-          Container(
+          if(this.isLogged) Container(
             height: 1,
             color: Theme
                 .of(context)
                 .dividerColor,
           ),
-          ListTile(
+          if(this.isLogged) ListTile(
             contentPadding: EdgeInsets.all(0),
             onTap: () => Navigate.pushPage(context, About()),
             leading: Icon(Feather.info),
             title: Text("About"),
           ),
-          Container(
+          if(this.isLogged) Container(
             height: 1,
             color: Theme
                 .of(context)

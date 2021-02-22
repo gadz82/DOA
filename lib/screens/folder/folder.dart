@@ -1,6 +1,8 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:filex/providers/providers.dart';
+import 'package:filex/screens/folder/widgets/set_default_dialog.dart';
 import 'package:filex/screens/folder/widgets/widgets.dart';
 import 'package:filex/utils/utils.dart';
 import 'package:filex/widgets/widgets.dart';
@@ -105,16 +107,14 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
       },
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
+          leading: paths.length > 1 ? IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              if (paths.length == 1) {
-                Navigator.pop(context);
-              } else {
-                navigateBack();
-              }
+
+              navigateBack();
+
             },
-          ),
+          ) : null,
           elevation: 4,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -172,6 +172,8 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
                       renameDialog(context, file.path, "dir");
                     } else if (v == 1) {
                       deleteFile(true, file);
+                    }else if (v == 2) {
+                      setDafault(context, file.absolute.path);
                     }
                   },
                   file: file,
@@ -240,6 +242,14 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
     await showDialog(
       context: context,
       builder: (context) => RenameFileDialog(path: path, type: type),
+    );
+    getFiles();
+  }
+
+  setDafault(BuildContext context, String path) async {
+    await showDialog(
+      context: context,
+      builder: (context) => DefDirDialog(path: path),
     );
     getFiles();
   }

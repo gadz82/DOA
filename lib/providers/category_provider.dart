@@ -1,4 +1,6 @@
+import 'dart:developer' as log;
 import 'dart:io';
+import 'dart:math';
 
 import 'package:filex/utils/utils.dart';
 import 'package:flutter/foundation.dart';
@@ -10,6 +12,8 @@ class CategoryProvider extends ChangeNotifier {
   CategoryProvider() {
     getHidden();
     getSort();
+    getAdminMode();
+    getDefaultDir();
   }
 
   bool loading = false;
@@ -23,6 +27,8 @@ class CategoryProvider extends ChangeNotifier {
   List<String> audioTabs = List();
 
   bool showHidden = false;
+  bool adminMode = true;
+  String defDir;
   int sort = 0;
 
   getDownloads() async {
@@ -60,7 +66,6 @@ class CategoryProvider extends ChangeNotifier {
     files.forEach((file) {
       String mimeType = mime(file.path) == null ? "" : mime(file.path);
       if (mimeType.split("/")[0] == type) {
-        images.add(file);
         imageTabs
             .add("${file.path.split("/")[file.path.split("/").length - 2]}");
         imageTabs = imageTabs.toSet().toList();
@@ -122,6 +127,20 @@ class CategoryProvider extends ChangeNotifier {
     setHidden(h);
   }
 
+  setAdminMode(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("adminMode", value);
+    adminMode = value;
+    notifyListeners();
+  }
+
+  getAdminMode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool h = prefs.getBool("adminMode") == null ? false : prefs.getBool("adminMode");
+    setAdminMode(h);
+    return h;
+  }
+
   Future setSort(value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt("sort", value);
@@ -133,5 +152,20 @@ class CategoryProvider extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int h = prefs.getInt("sort") == null ? 0 : prefs.getInt("sort");
     setSort(h);
+  }
+
+  setDefaultDir(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("defDir", value);
+    defDir = value;
+    notifyListeners();
+  }
+
+  getDefaultDir() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String h = prefs.getString("defDir");
+    log.log(h);
+    setDefaultDir(h);
+    return h;
   }
 }

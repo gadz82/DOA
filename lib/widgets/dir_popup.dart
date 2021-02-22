@@ -27,6 +27,12 @@ class DirPopup extends StatelessWidget {
             "Delete",
           ),
         ),
+        PopupMenuItem(
+          value: 2,
+          child: Text(
+            "Default Dir",
+          ),
+        ),
       ],
       icon: Icon(
         Icons.arrow_drop_down,
