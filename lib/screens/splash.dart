@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:filex/screens/main_screen/main_screen.dart';
-import 'package:filex/utils/utils.dart';
+import 'package:wanted/screens/main_screen/main_screen.dart';
+import 'package:wanted/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -61,7 +61,7 @@ class _SplashState extends State<Splash> {
             ),
             SizedBox(height: 20.0),
             Text(
-              "${AppStrings.appName}",
+              "Wanted!",
               style: TextStyle(
                 color: Theme.of(context).accentColor,
                 fontSize: 25.0,

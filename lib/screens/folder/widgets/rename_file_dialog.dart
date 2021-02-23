@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:filex/utils/utils.dart';
-import 'package:filex/widgets/widgets.dart';
+import 'package:wanted/utils/utils.dart';
+import 'package:wanted/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as pathlib;
 

@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:filex/providers/providers.dart';
-import 'package:filex/screens/folder/folder.dart';
-import 'package:filex/utils/utils.dart';
-import 'package:filex/widgets/dir_item.dart';
-import 'package:filex/widgets/file_item.dart';
+import 'package:wanted/providers/providers.dart';
+import 'package:wanted/screens/folder/folder.dart';
+import 'package:wanted/utils/utils.dart';
+import 'package:wanted/widgets/dir_item.dart';
+import 'package:wanted/widgets/file_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -61,9 +61,12 @@ class Search extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     return FutureBuilder<List<FileSystemEntity>>(
-      future: FileUtils.searchFiles(query,
-          showHidden:
-              Provider.of<CategoryProvider>(context, listen: false).showHidden),
+      future: FileUtils.searchFiles(
+          query,
+          Provider.of<CategoryProvider>(context, listen: false).showHidden,
+          Provider.of<CategoryProvider>(context, listen: false).adminMode,
+          Provider.of<CategoryProvider>(context, listen: false).getDefaultDir()
+      ),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return snapshot == null
             ? SizedBox()
@@ -117,8 +120,9 @@ class Search extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     return FutureBuilder<List<FileSystemEntity>>(
       future: FileUtils.searchFiles(query,
-          showHidden:
-              Provider.of<CategoryProvider>(context, listen: false).showHidden),
+          Provider.of<CategoryProvider>(context, listen: false).showHidden,
+          Provider.of<CategoryProvider>(context, listen: false).adminMode,
+          Provider.of<CategoryProvider>(context, listen: false).getDefaultDir()),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return snapshot == null
             ? SizedBox()

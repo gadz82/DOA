@@ -1,15 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:filex/providers/providers.dart';
-import 'package:filex/screens/apps_screen.dart';
+import 'package:wanted/providers/providers.dart';
+import 'package:wanted/screens/apps_screen.dart';
 import 'package:path/path.dart' as pathlib;
-import 'package:filex/screens/downloads.dart';
-import 'package:filex/screens/images.dart';
-import 'package:filex/screens/search.dart';
-import 'package:filex/screens/whatsapp_status.dart';
-import 'package:filex/utils/utils.dart';
-import 'package:filex/widgets/widgets.dart';
+import 'package:wanted/screens/downloads.dart';
+import 'package:wanted/screens/images.dart';
+import 'package:wanted/screens/search.dart';
+import 'package:wanted/screens/whatsapp_status.dart';
+import 'package:wanted/utils/utils.dart';
+import 'package:wanted/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';

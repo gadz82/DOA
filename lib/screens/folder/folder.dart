@@ -1,11 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:filex/providers/providers.dart';
-import 'package:filex/screens/folder/widgets/set_default_dialog.dart';
-import 'package:filex/screens/folder/widgets/widgets.dart';
-import 'package:filex/utils/utils.dart';
-import 'package:filex/widgets/widgets.dart';
+import 'package:wanted/providers/providers.dart';
+import 'package:wanted/screens/folder/widgets/set_default_dialog.dart';
+import 'package:wanted/screens/folder/widgets/widgets.dart';
+import 'package:wanted/utils/utils.dart';
+import 'package:wanted/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:path/path.dart' as pathlib;
@@ -121,13 +121,13 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text("${widget.title}"),
-              Text(
+              /*Text(
                 "$path",
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),
-              ),
+              ),*/
             ],
           ),
           bottom: PathBar(

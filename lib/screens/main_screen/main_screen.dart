@@ -1,8 +1,8 @@
-import 'package:filex/providers/providers.dart';
-import 'package:filex/screens/browse/browse.dart';
-import 'package:filex/screens/settings.dart';
-import 'package:filex/screens/share.dart';
-import 'package:filex/utils/utils.dart';
+import 'package:wanted/providers/providers.dart';
+import 'package:wanted/screens/browse/browse.dart';
+import 'package:wanted/screens/settings.dart';
+import 'package:wanted/screens/share.dart';
+import 'package:wanted/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -40,11 +40,11 @@ class _MainScreenState extends State<MainScreen> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Feather.folder),
-              label: "Browse",
+              label: "Sfoglia",
             ),
             BottomNavigationBarItem(
               icon: Icon(Feather.settings),
-              label: "Settings",
+              label: "Impostazioni",
             ),
           ],
           onTap: navigationTapped,

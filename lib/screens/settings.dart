@@ -2,9 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:device_info/device_info.dart';
-import 'package:filex/providers/providers.dart';
-import 'package:filex/screens/about.dart';
-import 'package:filex/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:wanted/providers/providers.dart';
+import 'package:wanted/screens/about.dart';
+import 'package:wanted/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class _SettingsState extends State<Settings> {
 
   String password;
 
-  final pwdController = TextEditingController();
+  final pwdController = TextEditingController(text: "");
 
   @override
   void dispose() {
@@ -57,7 +58,7 @@ class _SettingsState extends State<Settings> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: Text("Impostazioni"),
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -65,6 +66,9 @@ class _SettingsState extends State<Settings> {
         children: <Widget>[
           if(!this.isLogged) Column(
             children: <Widget>[
+              Container(
+                child: Text('Inserisci la password da Amministratore')
+              ),
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
@@ -89,7 +93,7 @@ class _SettingsState extends State<Settings> {
               Feather.eye_off,
             ),
             title: Text(
-              "See hidden files",
+              "Visualizza file e cartelle nascoste",
             ),
             value: Provider
                 .of<CategoryProvider>(context)
@@ -114,7 +118,7 @@ class _SettingsState extends State<Settings> {
               Feather.user,
             ),
             title: Text(
-              "Admin Mode",
+              "Modalità Dio",
             ),
             value: Provider
                 .of<CategoryProvider>(context)
@@ -138,7 +142,8 @@ class _SettingsState extends State<Settings> {
             leading: Icon(Feather.folder),
             title: Text(Provider
                 .of<CategoryProvider>(context)
-                .defDir),
+                .defDir??""),
+            subtitle: Text('Cartella visibile pubblicamente')
           ),
           if(this.isLogged) Container(
             height: 1,
@@ -155,7 +160,7 @@ class _SettingsState extends State<Settings> {
             secondary: Icon(
               Feather.moon,
             ),
-            title: Text("Dark mode"),
+            title: Text("Modalità Dark"),
             value: Provider
                 .of<AppProvider>(context)
                 .theme ==
@@ -187,24 +192,7 @@ class _SettingsState extends State<Settings> {
                 .dividerColor,
           )
               : SizedBox(),
-          if(this.isLogged) ListTile(
-            contentPadding: EdgeInsets.all(0),
-            onTap: () => showLicensePage(context: context),
-            leading: Icon(Feather.file_text),
-            title: Text("Open source licences"),
-          ),
-          if(this.isLogged) Container(
-            height: 1,
-            color: Theme
-                .of(context)
-                .dividerColor,
-          ),
-          if(this.isLogged) ListTile(
-            contentPadding: EdgeInsets.all(0),
-            onTap: () => Navigate.pushPage(context, About()),
-            leading: Icon(Feather.info),
-            title: Text("About"),
-          ),
+
           if(this.isLogged) Container(
             height: 1,
             color: Theme

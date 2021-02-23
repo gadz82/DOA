@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:filex/utils/utils.dart';
-import 'package:filex/widgets/video_thumbnail.dart';
+import 'package:wanted/utils/utils.dart';
+import 'package:wanted/widgets/video_thumbnail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:mime_type/mime_type.dart';

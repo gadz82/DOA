@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:filex/widgets/dir_popup.dart';
+import 'package:wanted/widgets/dir_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:path/path.dart';

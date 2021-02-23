@@ -37,6 +37,15 @@ class FileUtils {
     return filteredPaths;
   }
 
+/// Return all available Storage path
+  static Future<List<Directory>> getStorageDef( Future defDir ) async {
+    String ddir = await defDir;
+
+    List<Directory> filteredPaths = List<Directory>();
+    filteredPaths.add(Directory(ddir));
+    return filteredPaths;
+  }
+
   static Directory removeDataDirectory(String path) {
     return Directory(path.split("Android")[0]);
   }
@@ -72,9 +81,10 @@ class FileUtils {
     return files.reversed.toList();
   }
 
-  static Future<List<FileSystemEntity>> searchFiles(String query,
-      {bool showHidden}) async {
-    List<Directory> storage = await getStorageList();
+  static Future<List<FileSystemEntity>> searchFiles(String query, bool showHidden, bool adminMode, Future defDir) async {
+
+    List<Directory> storage = adminMode ? await getStorageList() : await getStorageDef(defDir);
+    dev.log(storage.toString());
     List<FileSystemEntity> files = List<FileSystemEntity>();
     for (Directory dir in storage) {
       List fs = await getAllFilesInPath(dir.path, showHidden: showHidden);

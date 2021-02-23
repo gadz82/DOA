@@ -1,7 +1,7 @@
-import 'package:filex/providers/providers.dart';
-import 'package:filex/utils/utils.dart';
-import 'package:filex/widgets/custom_divider.dart';
-import 'package:filex/widgets/file_item.dart';
+import 'package:wanted/providers/providers.dart';
+import 'package:wanted/utils/utils.dart';
+import 'package:wanted/widgets/custom_divider.dart';
+import 'package:wanted/widgets/file_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';

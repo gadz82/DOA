@@ -1,5 +1,5 @@
 import 'package:device_apps/device_apps.dart';
-import 'package:filex/widgets/widgets.dart';
+import 'package:wanted/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class AppScreen extends StatelessWidget {

@@ -29,7 +29,7 @@ class PathBar extends StatelessWidget implements PreferredSizeWidget {
             if (index == 0) {
               return IconButton(
                 icon: Icon(
-                  icon ?? Feather.smartphone,
+                  Feather.home,
                   color: index == paths.length - 1
                       ? Theme.of(context).accentColor
                       : Theme.of(context).textTheme.headline6.color,

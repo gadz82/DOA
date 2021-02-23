@@ -1,5 +1,5 @@
-import 'package:filex/screens/folder/folder.dart';
-import 'package:filex/utils/utils.dart';
+import 'package:wanted/screens/folder/folder.dart';
+import 'package:wanted/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 

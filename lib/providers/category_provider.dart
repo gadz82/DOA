@@ -2,7 +2,7 @@ import 'dart:developer' as log;
 import 'dart:io';
 import 'dart:math';
 
-import 'package:filex/utils/utils.dart';
+import 'package:wanted/utils/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:path/path.dart';
@@ -164,7 +164,6 @@ class CategoryProvider extends ChangeNotifier {
   getDefaultDir() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String h = prefs.getString("defDir");
-    log.log(h);
     setDefaultDir(h);
     return h;
   }
