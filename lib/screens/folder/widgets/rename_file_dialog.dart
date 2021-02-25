@@ -35,7 +35,7 @@ class _RenameFileDialogState extends State<RenameFileDialog> {
           children: <Widget>[
             SizedBox(height: 15),
             Text(
-              "Rename Item",
+              "Rinomina",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
@@ -60,7 +60,7 @@ class _RenameFileDialogState extends State<RenameFileDialog> {
                     borderSide:
                         BorderSide(color: Theme.of(context).accentColor),
                     child: Text(
-                      "Cancel",
+                      "Annulla",
                       style: TextStyle(
                         color: Theme.of(context).accentColor,
                       ),
@@ -77,7 +77,7 @@ class _RenameFileDialogState extends State<RenameFileDialog> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     child: Text(
-                      "Rename",
+                      "Rinomina",
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
@@ -95,12 +95,12 @@ class _RenameFileDialogState extends State<RenameFileDialog> {
                               print(e.toString());
                               if (e.toString().contains("Permission denied")) {
                                 Dialogs.showToast(
-                                    "Cannot write to this device!");
+                                    "Permesso di scrittura negato, attivarlo dalle impostazioni dell'App!");
                               }
                             });
                           } else {
                             Dialogs.showToast(
-                                "A File with that name already exists!");
+                                "Nome già in uso!");
                           }
                         } else {
                           if (Directory(widget.path.replaceAll(
@@ -108,7 +108,7 @@ class _RenameFileDialogState extends State<RenameFileDialog> {
                                   "${name.text}")
                               .existsSync()) {
                             Dialogs.showToast(
-                                "A Folder with that name already exists!");
+                                "Nome cartella già in uso!");
                           } else {
                             await Directory(widget.path)
                                 .rename(widget.path.replaceAll(
@@ -118,7 +118,7 @@ class _RenameFileDialogState extends State<RenameFileDialog> {
                               print(e.toString());
                               if (e.toString().contains("Permission denied")) {
                                 Dialogs.showToast(
-                                    "Cannot write to this device!");
+                                    "Permesso di scrittura negato, attivarlo dalle impostazioni dell'App!");
                               }
                             });
                           }

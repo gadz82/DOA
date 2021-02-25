@@ -47,11 +47,11 @@ class Constants {
   ];
 
   static List sortList = [
-    "File name (A to Z)",
-    "File name (Z to A)",
-    "Date (oldest first)",
-    "Date (newest first)",
-    "Size (largest first)",
-    "Size (Smallest first)",
+    "Nome file (A - Z)",
+    "Nome file (Z - A)",
+    "Data (prima i più vecchi)",
+    "Data (prima i più nuovi)",
+    "Dimenisoni (prima i più grandi)",
+    "Dimensioni (prima i più piccoli)",
   ];
 }

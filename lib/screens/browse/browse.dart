@@ -27,6 +27,7 @@ class Browse extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Theme.of(context).accentColor,
         title: Text(
           "${AppStrings.appName}",
           style: TextStyle(fontSize: 25.0),
@@ -55,7 +56,7 @@ class Browse extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(height: 20.0),
                     _SectionTitle('Storage Devices'),
-                    _StorageSection(),
+                    _StorageSection()
 
                   ],
                 );

@@ -23,7 +23,7 @@ class AddFileDialog extends StatelessWidget {
           children: <Widget>[
             SizedBox(height: 15),
             Text(
-              "Add New Folder",
+              "Aggiungi una cartella",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             SizedBox(height: 25),
@@ -45,7 +45,7 @@ class AddFileDialog extends StatelessWidget {
                     borderSide:
                         BorderSide(color: Theme.of(context).accentColor),
                     child: Text(
-                      "Cancel",
+                      "Annulla",
                       style: TextStyle(
                         color: Theme.of(context).accentColor,
                       ),
@@ -62,7 +62,7 @@ class AddFileDialog extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     child: Text(
-                      "Create",
+                      "Crea",
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
@@ -74,12 +74,12 @@ class AddFileDialog extends StatelessWidget {
                             print(e.toString());
                             if (e.toString().contains("Permission denied")) {
                               Dialogs.showToast(
-                                  "Cannot write to this Storage  device!");
+                                  "Permesso di scrittura negato, attivarlo dalle impostazioni dell'App!");
                             }
                           });
                         } else {
                           Dialogs.showToast(
-                              "A Folder with that name already exists!");
+                              "Nome cartella già in uso");
                         }
                         Navigator.pop(context);
                       }

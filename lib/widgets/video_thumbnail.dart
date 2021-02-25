@@ -5,9 +5,13 @@ import 'package:video_player/video_player.dart';
 
 class VideoThumbnail extends StatefulWidget {
   final String path;
+  var itemWidth;
+  var itemHeight;
 
   VideoThumbnail({
     Key key,
+    @required this.itemWidth,
+    @required this.itemHeight,
     @required this.path,
   }) : super(key: key);
 
@@ -53,8 +57,8 @@ class _VideoThumbnailState extends State<VideoThumbnail>
     return loading
         ? Image.asset(
             "assets/images/video-placeholder.png",
-            height: 40,
-            width: 40,
+            height: widget.itemHeight,
+            width: widget.itemWidth,
             fit: BoxFit.cover,
           )
         : VideoPlayer(_controller);

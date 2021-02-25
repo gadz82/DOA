@@ -18,7 +18,7 @@ class ThemeConfig {
     accentColor: lightAccent,
     scaffoldBackgroundColor: lightBG,
     appBarTheme: AppBarTheme(
-      elevation: 0,
+      elevation: 4,
       textTheme: TextTheme(
         headline6: TextStyle(
           color: Colors.black,

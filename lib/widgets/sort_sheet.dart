@@ -18,7 +18,7 @@ class SortSheet extends StatelessWidget {
               height: 15,
             ),
             Text(
-              "Sort by".toUpperCase(),
+              "Ordina per ".toUpperCase(),
               style: TextStyle(
                 fontSize: 12.0,
               ),
