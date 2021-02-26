@@ -104,6 +104,7 @@ class AppBarLayout extends StatelessWidget {
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Stack(
+          alignment: Alignment.bottomCenter,
           children: <Widget>[
             Flex(
               direction: Axis.vertical,
