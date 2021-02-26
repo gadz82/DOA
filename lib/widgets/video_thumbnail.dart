@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoThumbnail extends StatefulWidget {
-  final String path;
+  String path;
   var itemWidth;
   var itemHeight;
 
@@ -19,30 +19,14 @@ class VideoThumbnail extends StatefulWidget {
   _VideoThumbnailState createState() => _VideoThumbnailState();
 }
 
-class _VideoThumbnailState extends State<VideoThumbnail>
-    with AutomaticKeepAliveClientMixin {
+class _VideoThumbnailState extends State<VideoThumbnail> with AutomaticKeepAliveClientMixin {
   String thumb = "";
   bool loading = true;
   VideoPlayerController _controller;
 
-//  getThumb() async{
-//    var dir = await getExternalStorageDirectory();
-//    String thumbnail = await Thumbnails.getThumbnail(
-//      thumbnailFolder: dir.path,
-//      videoFile: widget.path,
-//      imageType: ThumbFormat.PNG,
-//      quality: 30,
-//    );
-//    setState(() {
-//      thumb = thumbnail;
-//      loading = false;
-//    });
-//  }
-
   @override
   void initState() {
     super.initState();
-//    getThumb();
     _controller = VideoPlayerController.file(File(widget.path))
       ..initialize().then((_) {
         setState(() {

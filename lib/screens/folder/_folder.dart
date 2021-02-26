@@ -62,7 +62,7 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
       files = FileUtils.sortList(files, provider.sort);
     } catch (e) {
       if (e.toString().contains("Permission denied")) {
-        Dialogs.showToast("Permission Denied! cannot access this Directory!");
+        Dialogs.showToast("Permesso Negato! Consenti l'accesso all'archiviazione all'app Wanted");
         navigateBack();
       }
     }

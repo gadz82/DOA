@@ -1,7 +1,4 @@
-import 'dart:developer' as log;
 import 'dart:io';
-import 'dart:math';
-
 import 'package:wanted/utils/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mime_type/mime_type.dart';
@@ -27,7 +24,7 @@ class CategoryProvider extends ChangeNotifier {
   List<String> audioTabs = List();
 
   bool showHidden = false;
-  bool adminMode = true;
+  bool adminMode = false;
   String defDir;
   int sort = 0;
 
@@ -163,7 +160,7 @@ class CategoryProvider extends ChangeNotifier {
 
   getDefaultDir() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String h = prefs.getString("defDir");
+    String h = prefs.getString("defDir") == null ? "" : prefs.getString("defDir");
     setDefaultDir(h);
     return h;
   }

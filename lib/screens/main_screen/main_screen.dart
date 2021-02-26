@@ -1,7 +1,6 @@
 import 'package:wanted/providers/providers.dart';
 import 'package:wanted/screens/browse/browse.dart';
 import 'package:wanted/screens/settings.dart';
-import 'package:wanted/screens/share.dart';
 import 'package:wanted/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

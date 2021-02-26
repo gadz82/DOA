@@ -68,40 +68,6 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
       )
     );
 
-    return Scaffold(
-      body: Container(
-        decoration: widget.backgroundDecoration,
-        constraints: BoxConstraints.expand(
-          height: MediaQuery.of(context).size.height,
-        ),
-        child: Stack(
-          alignment: Alignment.bottomRight,
-          children: <Widget>[
-            PhotoViewGallery.builder(
-              scrollPhysics: const BouncingScrollPhysics(),
-              builder: _buildItem,
-              itemCount: widget.galleryItems.length,
-              loadingBuilder: widget.loadingBuilder,
-              backgroundDecoration: widget.backgroundDecoration,
-              pageController: widget.pageController,
-              onPageChanged: onPageChanged,
-              scrollDirection: widget.scrollDirection,
-            ),
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                "Image ${currentIndex + 1}",
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17.0,
-                  decoration: null,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
   }
 
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
@@ -194,53 +160,6 @@ class _AppBarState extends State<AppBar> {
             Expanded(
               child: Text(
                 widget.title,
-                style: TextStyle(
-                    fontSize: Theme.of(context).appBarTheme.textTheme.headline6.fontSize, fontWeight: FontWeight.w700),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-class _AppBar extends StatelessWidget {
-  const _AppBar({this.title, this.showGoBack = false}) : super();
-
-  final String title;
-  final bool showGoBack;
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-        decoration: BoxDecoration(
-            color: Theme.of(context).accentColor,
-            boxShadow: <BoxShadow>[
-              const BoxShadow(
-                  color: Colors.black12, spreadRadius: 10.0, blurRadius: 20.0)
-            ]),
-        child: Row(
-          children: <Widget>[
-            Container(
-              child: showGoBack
-                  ? IconButton(
-                icon: const Icon(Icons.chevron_left),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                padding: EdgeInsets.zero,
-              )
-                  : Container(
-                height: 50.0,
-              ),
-            ),
-            Expanded(
-              child: Text(
-                title,
                 style: TextStyle(
                     fontSize: Theme.of(context).appBarTheme.textTheme.headline6.fontSize, fontWeight: FontWeight.w700),
               ),

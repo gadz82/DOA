@@ -1,14 +1,7 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:wanted/providers/providers.dart';
-import 'package:wanted/screens/apps_screen.dart';
 import 'package:path/path.dart' as pathlib;
-import 'package:wanted/screens/downloads.dart';
-import 'package:wanted/screens/images.dart';
 import 'package:wanted/screens/search.dart';
-import 'package:wanted/screens/whatsapp_status.dart';
-import 'package:wanted/utils/utils.dart';
 import 'package:wanted/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -64,12 +57,13 @@ class Browse extends StatelessWidget {
                     if (snapshot.hasData && snapshot.data != '') {
                       return Folder(title: pathlib.basename(  snapshot.data), path: snapshot.data);
                     } else {
-                      return Text('nada');
+                      return Center(
+                        child: Text('Imposta directory di default')
+                      );
                     }
                   }
               );
 
-              return Folder(title: pathlib.basename(CategoryProvider().defDir), path: CategoryProvider().defDir);
             }
           }
         )

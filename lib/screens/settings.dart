@@ -1,10 +1,7 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:device_info/device_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wanted/providers/providers.dart';
-import 'package:wanted/screens/about.dart';
 import 'package:wanted/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';

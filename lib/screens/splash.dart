@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:wanted/screens/main_screen/main_screen.dart';
 import 'package:wanted/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class Splash extends StatefulWidget {
@@ -23,7 +21,7 @@ class _SplashState extends State<Splash> {
 
   changeScreen() async {
     PermissionStatus status = await Permission.storage.status;
-    if (status.isGranted) {
+    if (!status.isGranted) {
       requestPermission();
     } else {
       Navigate.pushPageReplacement(context, MainScreen());
@@ -35,7 +33,7 @@ class _SplashState extends State<Splash> {
     if (status.isGranted) {
       Navigate.pushPageReplacement(context, MainScreen());
     } else {
-      Dialogs.showToast('Please Grant Storage Permissions');
+      Dialogs.showToast("Devi consentire l'accesso all'archiviazione del dispositivio all'App");
     }
   }
 

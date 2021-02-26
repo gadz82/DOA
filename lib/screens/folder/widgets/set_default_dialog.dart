@@ -1,14 +1,6 @@
-import 'dart:developer';
-import 'dart:io';
-
-import 'package:wanted/utils/utils.dart';
 import 'package:wanted/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' as pathlib;
 import 'package:provider/provider.dart';
-
-import '../../../providers/category_provider.dart';
-import '../../../providers/category_provider.dart';
 import '../../../providers/category_provider.dart';
 
 class DefDirDialog extends StatefulWidget {
@@ -86,7 +78,6 @@ class _DefDirDialogState extends State<DefDirDialog> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
-                      log(path);
                       Provider
                           .of<CategoryProvider>(context, listen: false)
                           .setDefaultDir(path);

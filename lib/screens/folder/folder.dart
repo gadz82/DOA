@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:wanted/providers/providers.dart';
@@ -67,7 +66,7 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
       files = FileUtils.sortList(files, provider.sort);
     } catch (e) {
       if (e.toString().contains("Permission denied")) {
-        Dialogs.showToast("Permission Denied! cannot access this Directory!");
+        Dialogs.showToast("Permesso negato!");
         navigateBack();
       }
     }
