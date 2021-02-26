@@ -1,7 +1,8 @@
-import 'dart:developer';
+import 'package:mime_type/mime_type.dart';
 import 'dart:io';
 
 import 'package:wanted/utils/utils.dart';
+import 'package:wanted/widgets/file_detail.dart';
 import 'package:wanted/widgets/file_icon.dart';
 import 'package:wanted/widgets/file_popup.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,18 @@ class FileItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-        onPressed: () => OpenFile.open(file.path),
+        onPressed: (){
+          String mimeType = mime(basename(file.path).toLowerCase());
+          String type = mimeType == null ? "" : mimeType.split("/")[0];
+          if(type == "image"){
+            Navigate.pushPage(
+              context,
+              FileDetail(file: this.file),
+            );
+          } else {
+            return OpenFile.open(file.path);
+          }
+        },
         padding: EdgeInsets.all(1),
         child: Container(
             child: Wrap(
