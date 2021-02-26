@@ -28,10 +28,7 @@ class Browse extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Theme.of(context).accentColor,
-        title: Text(
-          "${AppStrings.appName}",
-          style: TextStyle(fontSize: 25.0),
-        ),
+        title: Image.asset('images/wanted-h.png', width: 200),
         actions: <Widget>[
           IconButton(
             tooltip: "Search",

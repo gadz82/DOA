@@ -54,20 +54,8 @@ class _SplashState extends State<Splash> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(
-              Feather.folder,
-              color: Theme.of(context).accentColor,
-              size: 70.0,
-            ),
+            new Image.asset('images/wanted-large.png'),
             SizedBox(height: 20.0),
-            Text(
-              "Wanted!",
-              style: TextStyle(
-                color: Theme.of(context).accentColor,
-                fontSize: 25.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
           ],
         ),
       ),
