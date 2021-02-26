@@ -103,16 +103,15 @@ class AppBarLayout extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
         height: MediaQuery.of(context).size.height,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
           children: <Widget>[
-            AppBar(
-              title: title,
-              showGoBack: showGoBack,
-            ),
             Expanded(
               child: child,
             ),
+            AppBar(
+              title: title,
+              showGoBack: showGoBack,
+            )
           ],
         ),
       ),
@@ -137,7 +136,7 @@ class _AppBarState extends State<AppBar> {
       child: Container(
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
         decoration: BoxDecoration(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).accentColor.withOpacity(0.75),
             boxShadow: <BoxShadow>[
               const BoxShadow(
                   color: Colors.black12, spreadRadius: 10.0, blurRadius: 20.0)

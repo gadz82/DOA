@@ -30,25 +30,7 @@ class _MainScreenState extends State<MainScreen> {
             Settings(),
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          selectedItemColor: Theme.of(context).accentColor,
-          unselectedItemColor: Theme.of(context).textTheme.headline1.color,
-          elevation: 4.0,
-          type: BottomNavigationBarType.fixed,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Feather.folder),
-              label: "Sfoglia",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Feather.settings),
-              label: "Impostazioni",
-            ),
-          ],
-          onTap: navigationTapped,
-          currentIndex: _page,
-        ),
+
       ),
     );
   }
