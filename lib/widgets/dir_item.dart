@@ -66,7 +66,7 @@ class DirectoryItem extends StatelessWidget {
                                     ])),
                             child: Padding(
                                 padding: EdgeInsets.all(5),
-                                child: Text(basename(file.path), overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal, color:Colors.white), textAlign: TextAlign.left)
+                                child: Text(basename(file.path), overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal, color:Theme.of(context).appBarTheme.textTheme.headline6.color), textAlign: TextAlign.left)
                             ),
                           )
 

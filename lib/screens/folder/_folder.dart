@@ -110,7 +110,6 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              log(paths.length.toString());
               if (paths.length == 1) {
                 Navigator.pop(context);
               } else {

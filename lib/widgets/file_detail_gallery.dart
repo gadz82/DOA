@@ -61,7 +61,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
         builder: _buildItem,
         itemCount: widget.galleryItems.length,
         loadingBuilder: widget.loadingBuilder,
-        backgroundDecoration: widget.backgroundDecoration,
+        backgroundDecoration: BoxDecoration(color: Theme.of(context).backgroundColor),
         pageController: widget.pageController,
         onPageChanged: onPageChanged,
         scrollDirection: widget.scrollDirection,
@@ -100,7 +100,7 @@ class AppBarLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(

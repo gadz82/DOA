@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:wanted/providers/providers.dart';
+import 'package:wanted/screens/settings.dart';
 import 'package:path/path.dart' as pathlib;
 import 'package:wanted/screens/search.dart';
+import 'package:wanted/utils/navigate.dart';
 import 'package:wanted/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -21,7 +23,9 @@ class Browse extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Theme.of(context).accentColor,
-        title: Image.asset('images/wanted-h.png', width: 200),
+        title: InkWell(child: Image.asset('images/wanted-h.png', width: 200), onLongPress: (){
+          Navigate.pushPageReplacement(context, Settings());
+        }),
         actions: <Widget>[
           IconButton(
             tooltip: "Search",
