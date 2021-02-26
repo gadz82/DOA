@@ -2,7 +2,6 @@ import 'package:mime_type/mime_type.dart';
 import 'dart:io';
 
 import 'package:wanted/utils/utils.dart';
-import 'package:wanted/widgets/file_detail.dart';
 import 'package:wanted/widgets/file_detail_gallery.dart';
 import 'package:wanted/widgets/file_icon.dart';
 import 'package:wanted/widgets/file_popup.dart';
@@ -72,7 +71,7 @@ class FileItem extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        height: itemHeight/4,
+                        height: 30,
                         width: 2000,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -88,8 +87,8 @@ class FileItem extends StatelessWidget {
                                   1.0
                                 ])),
                         child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: (itemHeight/4)/5, horizontal: 1),
-                            child: Text(basename(file.path),overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color:Colors.white), textAlign: TextAlign.left)
+                            padding: EdgeInsets.all(5),
+                            child: Text(basename(file.path),overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal, color:Colors.white), textAlign: TextAlign.left)
                         ),
                       )
 

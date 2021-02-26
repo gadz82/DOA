@@ -226,11 +226,11 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
             }
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: Provider.of<CategoryProvider>(context, listen: false).adminMode ? FloatingActionButton(
           onPressed: () => addDialog(context, path),
           child: Icon(Feather.plus),
           tooltip: "Add Folder",
-        ),
+        ) : null,
       ),
     );
   }

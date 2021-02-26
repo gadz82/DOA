@@ -64,29 +64,33 @@ class _SettingsState extends State<Settings> {
         padding: EdgeInsets.symmetric(horizontal: 20),
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
-          if(!this.isLogged) Column(
-            children: <Widget>[
-              Container(
-                child: Text('Inserisci la password da Amministratore')
-              ),
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
-                controller: pwdController,
-                onChanged: (text) {
-                  if(text == 'tato'){
-                    setState(() {
-                      this.isLogged = true;
-                    });
-                  }
-                },
-              ),
+          if(!this.isLogged)
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 30),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                      child: Text('Inserisci la password da Amministratore')
+                  ),
+                  TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Password',
+                    ),
+                    controller: pwdController,
+                    onChanged: (text) {
+                      if(text == 'tato'){
+                        setState(() {
+                          this.isLogged = true;
+                        });
+                      }
+                    },
+                  ),
 
-            ],
-          ),
+                ],
+              )
+            ),
           if(this.isLogged) SwitchListTile.adaptive(
             contentPadding: EdgeInsets.all(0),
             secondary: Icon(

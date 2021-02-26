@@ -18,13 +18,13 @@ class FilePopup extends StatelessWidget {
         PopupMenuItem(
           value: 0,
           child: Text(
-            "Rename",
+            "Rinomina",
           ),
         ),
         PopupMenuItem(
           value: 1,
           child: Text(
-            "Delete",
+            "Elimina",
           ),
         ),
 //        PopupMenuItem(
