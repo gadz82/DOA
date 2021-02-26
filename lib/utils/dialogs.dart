@@ -27,7 +27,7 @@ class Dialogs {
               ),
               SizedBox(height: 25),
               Text(
-                "Are you sure you want to quit?",
+                "Sei sicuro di voler uscire?",
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 14,

@@ -105,8 +105,12 @@ class AppBarLayout extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         child: Stack(
           children: <Widget>[
-            Expanded(
-              child: child,
+            Flex(
+              direction: Axis.vertical,
+              children: [
+                Expanded(
+                child: child,
+              )]
             ),
             AppBar(
               title: title,
@@ -136,7 +140,7 @@ class _AppBarState extends State<AppBar> {
       child: Container(
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
         decoration: BoxDecoration(
-            color: Theme.of(context).accentColor.withOpacity(0.75),
+            color: Theme.of(context).accentColor.withOpacity(0.40),
             boxShadow: <BoxShadow>[
               const BoxShadow(
                   color: Colors.black12, spreadRadius: 10.0, blurRadius: 20.0)
