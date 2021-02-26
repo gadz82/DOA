@@ -118,6 +118,19 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    List<String> paths = List();
+    String getDeviceType() {
+      final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+      return data.size.shortestSide < 600 ? 'phone' :'tablet';
+    }
+    Size size = MediaQuery.of(context).size;
+    Orientation currentOrientation = MediaQuery.of(context).orientation;
+    final double itemHeight = getDeviceType() == 'phone' ?
+    (currentOrientation == Orientation.portrait ? (size.height - kToolbarHeight - size.width) / 1.8 : (size.height - kToolbarHeight) / 1.93):
+    (currentOrientation == Orientation.portrait ? (size.height - kToolbarHeight - (size.width / 1.3)) / 2 : (size.height - kToolbarHeight) / 4);
+    final double itemWidth = getDeviceType() == 'phone' ?
+    (currentOrientation == Orientation.portrait ? size.width / 2 : size.width / 3):
+    (currentOrientation == Orientation.portrait ? size.width / 3 : size.width / 4);
     return FutureBuilder<List<FileSystemEntity>>(
       future: FileUtils.searchFiles(query,
           Provider.of<CategoryProvider>(context, listen: false).showHidden,
@@ -131,42 +144,37 @@ class Search extends SearchDelegate {
                     ? Center(
                         child: Text("No file match your query!"),
                       )
-                    : ListView.separated(
-                        padding: EdgeInsets.only(left: 20),
+                    :
+                    GridView.builder(
+                        padding: EdgeInsets.all(5.00),
                         itemCount: snapshot.data.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: (currentOrientation == Orientation.portrait) ? 2 : 3,
+                            childAspectRatio: (itemWidth / itemHeight)
+                        ),
                         itemBuilder: (BuildContext context, int index) {
                           FileSystemEntity file = snapshot.data[index];
-                          return file.toString().split(":")[0] == "Directory"
-                              ? DirectoryItem(
-                                  popTap: null,
-                                  file: file,
-                                  tap: () {
-                                    Navigate.pushPage(
-                                      context,
-                                      Folder(title: "Storage", path: file.path),
-                                    );
-                                  },
-                                )
-                              : FileItem(
-                                  file: file,
-                                  popTap: null,
-                                );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return Stack(
-                            children: <Widget>[
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Container(
-                                  height: 1,
-                                  color: Theme.of(context).dividerColor,
-                                  width: MediaQuery.of(context).size.width - 70,
-                                ),
-                              ),
-                            ],
+                          if (file.toString().split(":")[0] == "Directory") {
+                            return DirectoryItem(
+                                popTap: () => null,
+                                file: file,
+                                tap: () {
+                                  paths.add(file.path);
+                                },
+                                itemHeight: itemHeight,
+                                itemWidth: itemWidth
+                            );
+                          }
+                          return FileItem(
+                            file: file,
+                            files: snapshot.data,
+                            index: index,
+                            itemHeight: itemHeight,
+                            itemWidth: itemWidth,
+                            popTap: () => null,
                           );
-                        },
-                      )
+                        }
+                    )
                 : SizedBox();
       },
     );

@@ -39,11 +39,6 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
     }
   }
 
-  String getDeviceType() {
-    final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
-    return data.size.shortestSide < 600 ? 'phone' :'tablet';
-  }
-
   getFiles() async {
     try {
       var provider = Provider.of<CategoryProvider>(context, listen: false);
@@ -97,15 +92,6 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    Orientation currentOrientation = MediaQuery.of(context).orientation;
-    final double itemHeight = this.getDeviceType() == 'phone' ?
-    (currentOrientation == Orientation.portrait ? (size.height - kToolbarHeight - size.width) / 1.8 : (size.height - kToolbarHeight) / 1.93):
-    (currentOrientation == Orientation.portrait ? (size.height - kToolbarHeight - (size.width / 1.3)) / 2 : (size.height - kToolbarHeight) / 4);
-    final double itemWidth = this.getDeviceType() == 'phone' ?
-    (currentOrientation == Orientation.portrait ? size.width / 2 : size.width / 3):
-    (currentOrientation == Orientation.portrait ? size.width / 3 : size.width / 4);
-
     return WillPopScope(
       onWillPop: () async {
         if (paths.length == 1) {
@@ -121,43 +107,45 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
       },
       child: Scaffold(
         appBar: AppBar(
-          leading: paths.length > 1 ? IconButton(
+          leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-
-              navigateBack();
-
+              log(paths.length.toString());
+              if (paths.length == 1) {
+                Navigator.pop(context);
+              } else {
+                navigateBack();
+              }
             },
-          ) : null,
+          ),
           elevation: 4,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              //Text("${widget.title}"),
-              PathBar(
-                paths: paths,
-                icon: widget.path.toString().contains("emulated")
-                    ? Feather.smartphone
-                    : Icons.sd_card,
-                onChanged: (index) {
-                  print(paths[index]);
-                  path = paths[index];
-                  paths.removeRange(index + 1, paths.length);
-                  setState(() {});
-                  getFiles();
-                },
-              )
-              /*Text(
+              Text("${widget.title}"),
+              Text(
                 "$path",
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),
-              ),*/
+              ),
             ],
           ),
-
+          bottom: PathBar(
+            paths: paths,
+            icon: widget.path.toString().contains("emulated")
+                ? Feather.smartphone
+                : Icons.sd_card,
+            onChanged: (index) {
+              print(paths[index]);
+              path = paths[index];
+              paths.removeRange(index + 1, paths.length);
+              setState(() {});
+              getFiles();
+            },
+          ),
           actions: <Widget>[
             IconButton(
               onPressed: () async {
@@ -167,7 +155,7 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
                 );
                 getFiles();
               },
-              tooltip: "Ordina per",
+              tooltip: "Sort by",
               icon: Icon(Icons.sort),
             ),
           ],
@@ -175,13 +163,9 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
         body: Visibility(
           replacement: Center(child: Text("There's nothing here")),
           visible: files.isNotEmpty,
-          child: GridView.builder(
-            padding: EdgeInsets.all(5.00),
+          child: ListView.separated(
+            padding: EdgeInsets.only(left: 20),
             itemCount: files.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: (currentOrientation == Orientation.portrait) ? 2 : 3,
-              childAspectRatio: (itemWidth / itemHeight)
-            ),
             itemBuilder: (BuildContext context, int index) {
               FileSystemEntity file = files[index];
               if (file.toString().split(":")[0] == "Directory") {
@@ -202,16 +186,10 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
                     setState(() {});
                     getFiles();
                   },
-                  itemHeight: itemHeight,
-                  itemWidth: itemWidth
                 );
               }
               return FileItem(
                 file: file,
-                files : files,
-                index : index,
-                itemHeight: itemHeight,
-                itemWidth: itemWidth,
                 popTap: (v) async {
                   if (v == 0) {
                     renameDialog(context, file.path, "file");
@@ -223,7 +201,10 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
                   }
                 },
               );
-            }
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return CustomDivider();
+            },
           ),
         ),
         floatingActionButton: FloatingActionButton(

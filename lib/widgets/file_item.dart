@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:wanted/utils/utils.dart';
 import 'package:wanted/widgets/file_detail.dart';
+import 'package:wanted/widgets/file_detail_gallery.dart';
 import 'package:wanted/widgets/file_icon.dart';
 import 'package:wanted/widgets/file_popup.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import 'package:path/path.dart';
 
 class FileItem extends StatelessWidget {
   final FileSystemEntity file;
+  final List<FileSystemEntity> files;
+  final int index;
   final Function popTap;
   final itemHeight;
   final itemWidth;
@@ -18,6 +21,8 @@ class FileItem extends StatelessWidget {
   FileItem({
     Key key,
     @required this.file,
+    @required this.files,
+    @required this.index,
     this.popTap,
     @required this.itemWidth,
     @required this.itemHeight
@@ -30,9 +35,18 @@ class FileItem extends StatelessWidget {
           String mimeType = mime(basename(file.path).toLowerCase());
           String type = mimeType == null ? "" : mimeType.split("/")[0];
           if(type == "image"){
-            Navigate.pushPage(
+            Navigator.push(
               context,
-              FileDetail(file: this.file),
+              MaterialPageRoute(
+                builder: (context) => GalleryPhotoViewWrapper(
+                  galleryItems: this.files,
+                  backgroundDecoration: const BoxDecoration(
+                    color: Colors.black,
+                  ),
+                  initialIndex: index,
+                  scrollDirection: Axis.horizontal,
+                ),
+              ),
             );
           } else {
             return OpenFile.open(file.path);
