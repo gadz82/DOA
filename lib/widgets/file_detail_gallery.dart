@@ -61,7 +61,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
         builder: _buildItem,
         itemCount: widget.galleryItems.length,
         loadingBuilder: widget.loadingBuilder,
-        backgroundDecoration: BoxDecoration(color: Theme.of(context).backgroundColor),
+        backgroundDecoration: BoxDecoration(color: Colors.black),
         pageController: widget.pageController,
         onPageChanged: onPageChanged,
         scrollDirection: widget.scrollDirection,
@@ -142,7 +142,7 @@ class _AppBarState extends State<AppBar> {
       child: Container(
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
         decoration: BoxDecoration(
-            color: Theme.of(context).accentColor.withOpacity(0.40),
+            color: Theme.of(context).accentColor.withOpacity(0.30),
             boxShadow: <BoxShadow>[
               const BoxShadow(
                   color: Colors.black12, spreadRadius: 10.0, blurRadius: 20.0)
