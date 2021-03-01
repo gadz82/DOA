@@ -25,66 +25,37 @@ class DirectoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-        onPressed: () => this.tap(),
-        padding: EdgeInsets.all(1),
-        child: Container(
-          child: Wrap(
-              children: [
-                Stack(
-                    alignment: Alignment.topRight,
-                    children: <Widget>[
-                      Stack(
-                        alignment: Alignment.bottomLeft,
-                        children: <Widget>[
-                          Container(
-                            height: itemHeight,
-                            width: itemWidth,
-                            color: Theme.of(context).backgroundColor,
-                            child: Center(
-                                child: Icon(
-                                  Feather.folder,
-                                  size: 60,
-                                )
-                            ),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 2000,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                gradient: LinearGradient(
-                                    begin: Alignment.centerRight,
-                                    end: Alignment.centerLeft,
-                                    colors: [
-                                      Theme.of(context).accentColor,
-                                      Theme.of(context).accentColor,
-                                    ],
-                                    stops: [
-                                      0.0,
-                                      1.0
-                                    ])),
-                            child: Padding(
-                                padding: EdgeInsets.all(5),
-                                child: Text(basename(file.path), overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal, color:Theme.of(context).appBarTheme.textTheme.headline6.color), textAlign: TextAlign.left)
-                            ),
-                          )
-
-                        ],
-                      ),
-                      if(Provider.of<CategoryProvider>(context).adminMode)
-                        Container(
-                            height: 30,
-                            width: 50,
-                            color: Theme.of(context).backgroundColor,
-                            child: DirPopup(path: this.file.path, popTap: popTap)
-                        )
-                    ]
-                ),
-
-              ]
-          )
-      )
+    return ListTile(
+      onTap: tap,
+      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 2.50),
+      leading: Container(
+        height: 40,
+        width: 40,
+        child: Center(
+          child: ClipOval(
+            child: Container(
+              color: Colors.red,
+              child: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: Icon(
+                    Feather.folder,
+                    color: Colors.white,
+                    size: 20,
+                  )),
+            ),
+          ),
+        ),
+      ),
+      title: Text(
+        "${basename(file.path)}",
+        style: TextStyle(
+          fontSize: 14,
+        ),
+        maxLines: 2,
+      ),
+      trailing:
+      popTap == null ? null : DirPopup(path: file.path, popTap: popTap),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:wanted/providers/providers.dart';
@@ -29,6 +30,7 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
   List<String> paths = List();
 
   List<FileSystemEntity> files = List();
+  List<FileSystemEntity> directories = List();
   bool showHidden = false;
 
   @override
@@ -49,17 +51,23 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
       Directory dir = Directory(path);
       List<FileSystemEntity> dirFiles = dir.listSync();
       files.clear();
+      directories.clear();
       showHidden = provider.showHidden;
       setState(() {});
       for (FileSystemEntity file in dirFiles) {
-        if (!showHidden) {
-          if (!pathlib.basename(file.path).startsWith(".")) {
+        if (file.toString().split(":")[0] != "Directory") {
+
+          if (!showHidden) {
+            if (!pathlib.basename(file.path).startsWith(".")) {
+              files.add(file);
+              setState(() {});
+            }
+          } else {
             files.add(file);
             setState(() {});
           }
         } else {
-          files.add(file);
-          setState(() {});
+          directories.add(file);
         }
       }
 
@@ -100,10 +108,10 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
     Orientation currentOrientation = MediaQuery.of(context).orientation;
     final double itemHeight = this.getDeviceType() == 'phone' ?
     (currentOrientation == Orientation.portrait ? (size.height - kToolbarHeight - size.width) / 1.8 : (size.height - kToolbarHeight) / 1.93):
-    (currentOrientation == Orientation.portrait ? (size.height - kToolbarHeight - (size.width / 1.3)) / 2 : (size.height - kToolbarHeight) / 4);
+    (currentOrientation == Orientation.portrait ? (size.height - size.width) / 2 : size.height / 3);
     final double itemWidth = this.getDeviceType() == 'phone' ?
     (currentOrientation == Orientation.portrait ? size.width / 2 : size.width / 3):
-    (currentOrientation == Orientation.portrait ? size.width / 3 : size.width / 4);
+    (currentOrientation == Orientation.portrait ? size.width / 3 : size.width / 3);
 
     return WillPopScope(
       onWillPop: () async {
@@ -173,57 +181,96 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
         ),
         body: Visibility(
           replacement: Center(child: Text("There's nothing here")),
-          visible: files.isNotEmpty,
-          child: GridView.builder(
-            padding: EdgeInsets.all(5.00),
-            itemCount: files.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: (currentOrientation == Orientation.portrait) ? 2 : 3,
-              childAspectRatio: (itemWidth / itemHeight)
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              FileSystemEntity file = files[index];
-              if (file.toString().split(":")[0] == "Directory") {
-                return DirectoryItem(
-                  popTap: (v) async {
-                    if (v == 0) {
-                      renameDialog(context, file.path, "dir");
-                    } else if (v == 1) {
-                      deleteFile(true, file);
-                    }else if (v == 2) {
-                      setDafault(context, file.absolute.path);
+          visible: directories.isNotEmpty || files.isNotEmpty,
+          child: ListView(
+              children: [
+                  ListView.separated(
+                    padding: EdgeInsets.only(left: 5),
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemCount: directories.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      FileSystemEntity file = directories[index];
+                        return DirectoryItem(
+                          popTap: Provider.of<CategoryProvider>(context, listen: false).adminMode ? (v) async {
+                            if (v == 0) {
+                              renameDialog(context, file.path, "dir");
+                            } else if (v == 1) {
+                              deleteFile(true, file);
+                            }else if (v == 2) {
+                              setDafault(context, file.absolute.path);
+                            }
+                          } : null,
+                          file: file,
+                          tap: () {
+                            paths.add(file.path);
+                            path = file.path;
+                            setState(() {});
+                            getFiles();
+                          },
+                        );
+
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return CustomDivider();
+                    },
+
+                ),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    padding: EdgeInsets.all(5.00),
+                    itemCount: files.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: this.getDeviceType() == 'phone' ? ((currentOrientation == Orientation.portrait) ? 2 : 3) :
+                        3,
+                      childAspectRatio: (itemWidth / itemHeight)
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      FileSystemEntity file = files[index];
+                      if (file.toString().split(":")[0] == "Directory") {
+                        return DirectoryItem(
+                          popTap: (v) async {
+                            if (v == 0) {
+                              renameDialog(context, file.path, "dir");
+                            } else if (v == 1) {
+                              deleteFile(true, file);
+                            }else if (v == 2) {
+                              setDafault(context, file.absolute.path);
+                            }
+                          },
+                          file: file,
+                          tap: () {
+                            paths.add(file.path);
+                            path = file.path;
+                            setState(() {});
+                            getFiles();
+                          },
+                          itemHeight: itemHeight,
+                          itemWidth: itemWidth
+                        );
+                      }
+                      return FileItem(
+                        file: file,
+                        files : files,
+                        index : index,
+                        itemHeight: itemHeight,
+                        itemWidth: itemWidth,
+                        popTap: (v) async {
+                          if (v == 0) {
+                            renameDialog(context, file.path, "file");
+                          } else if (v == 1) {
+                            deleteFile(false, file);
+                          } else if (v == 2) {
+                            /// TODO: Implement Share file feature
+                            print("Share");
+                          }
+                        },
+                      );
                     }
-                  },
-                  file: file,
-                  tap: () {
-                    paths.add(file.path);
-                    path = file.path;
-                    setState(() {});
-                    getFiles();
-                  },
-                  itemHeight: itemHeight,
-                  itemWidth: itemWidth
-                );
-              }
-              return FileItem(
-                file: file,
-                files : files,
-                index : index,
-                itemHeight: itemHeight,
-                itemWidth: itemWidth,
-                popTap: (v) async {
-                  if (v == 0) {
-                    renameDialog(context, file.path, "file");
-                  } else if (v == 1) {
-                    deleteFile(false, file);
-                  } else if (v == 2) {
-                    /// TODO: Implement Share file feature
-                    print("Share");
-                  }
-                },
-              );
-            }
-          ),
+                  )
+              ]
+            ),
         ),
         floatingActionButton: Provider.of<CategoryProvider>(context, listen: false).adminMode ? FloatingActionButton(
           onPressed: () => addDialog(context, path),

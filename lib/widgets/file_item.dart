@@ -76,8 +76,8 @@ class FileItem extends StatelessWidget {
                                 begin: Alignment.centerRight,
                                 end: Alignment.centerLeft,
                                 colors: [
-                                  Theme.of(context).accentColor,
-                                  Theme.of(context).accentColor,
+                                  Theme.of(context).accentColor.withOpacity(0.40),
+                                  Theme.of(context).accentColor.withOpacity(0.30),
                                 ],
                                 stops: [
                                   0.0,
@@ -85,7 +85,7 @@ class FileItem extends StatelessWidget {
                                 ])),
                         child: Padding(
                             padding: EdgeInsets.all(5),
-                            child: Text(basename(file.path),overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal, color:Theme.of(context).appBarTheme.textTheme.headline6.color), textAlign: TextAlign.left)
+                            child: Text(basename(file.path).replaceAll(extension(file.path).toLowerCase(), ''),overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal, color:Theme.of(context).appBarTheme.textTheme.headline6.color), textAlign: TextAlign.left)
                         ),
                       )
 

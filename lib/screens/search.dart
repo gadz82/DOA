@@ -127,10 +127,10 @@ class Search extends SearchDelegate {
     Orientation currentOrientation = MediaQuery.of(context).orientation;
     final double itemHeight = getDeviceType() == 'phone' ?
     (currentOrientation == Orientation.portrait ? (size.height - kToolbarHeight - size.width) / 1.8 : (size.height - kToolbarHeight) / 1.93):
-    (currentOrientation == Orientation.portrait ? (size.height - kToolbarHeight - (size.width / 1.3)) / 2 : (size.height - kToolbarHeight) / 4);
+    (currentOrientation == Orientation.portrait ? (size.height - size.width) / 2 : size.height / 3);
     final double itemWidth = getDeviceType() == 'phone' ?
     (currentOrientation == Orientation.portrait ? size.width / 2 : size.width / 3):
-    (currentOrientation == Orientation.portrait ? size.width / 3 : size.width / 4);
+    (currentOrientation == Orientation.portrait ? size.width / 3 : size.width / 3);
     return FutureBuilder<List<FileSystemEntity>>(
       future: FileUtils.searchFiles(query,
           Provider.of<CategoryProvider>(context, listen: false).showHidden,

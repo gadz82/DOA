@@ -22,8 +22,8 @@ class Browse extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Theme.of(context).accentColor,
-        title: InkWell(child: Image.asset('images/wanted-h.png', width: 200), onLongPress: (){
+        backgroundColor: Colors.red,
+        title: InkWell(child: Image.asset('images/wanted-h.png', width: 120), onLongPress: (){
           Navigate.pushPageReplacement(context, Settings());
         }),
         actions: <Widget>[

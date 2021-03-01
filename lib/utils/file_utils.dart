@@ -1,4 +1,3 @@
-import 'dart:developer' as dev;
 import 'dart:io';
 import 'dart:math';
 
@@ -84,7 +83,6 @@ class FileUtils {
   static Future<List<FileSystemEntity>> searchFiles(String query, bool showHidden, bool adminMode, Future defDir) async {
 
     List<Directory> storage = adminMode ? await getStorageList() : await getStorageDef(defDir);
-    dev.log(storage.toString());
     List<FileSystemEntity> files = List<FileSystemEntity>();
     for (Directory dir in storage) {
       List fs = await getAllFilesInPath(dir.path, showHidden: showHidden);
@@ -94,7 +92,31 @@ class FileUtils {
         }
       }
     }
+    List _dirs = await searchDirs(query, showHidden, adminMode, defDir);
+    for (FileSystemEntity d in _dirs) {
+      List _fs = await getAllFilesInPath(d.path, showHidden: showHidden);
+      for (FileSystemEntity dfs in _fs) {
+        files.add(dfs);
+      }
+    }
+
     return files;
+  }
+
+  static Future<List<FileSystemEntity>> searchDirs(String query, bool showHidden, bool adminMode, Future defDir) async {
+
+    List<Directory> storage = adminMode ? await getStorageList() : await getStorageDef(defDir);
+    List<FileSystemEntity> dirs = List<FileSystemEntity>();
+    for (Directory dir in storage) {
+      List _dirs = await getAllDirsInPath(dir.path, showHidden: showHidden);
+
+      for (FileSystemEntity d in _dirs) {
+        if (basename(d.path).toLowerCase().contains(query.toLowerCase())) {
+          dirs.add(d);
+        }
+      }
+    }
+    return dirs;
   }
 
   /// Get all files
@@ -130,6 +152,31 @@ class FileUtils {
 //    print(files);
     return files;
   }
+
+  /// Get all files
+  static Future<List<FileSystemEntity>> getAllDirsInPath(String path, {bool showHidden}) async {
+    List<FileSystemEntity> dirs = List<FileSystemEntity>();
+    Directory d = Directory(path);
+    List<FileSystemEntity> l = d.listSync();
+    for (FileSystemEntity file in l) {
+      if (file.toString().split(":")[0] == "Directory") {
+        dirs.add(file);
+//          print(file.path);
+        if (!showHidden) {
+          if (!basename(file.path).startsWith(".")) {
+            dirs.addAll(
+                await getAllDirsInPath(file.path, showHidden: showHidden));
+          }
+        } else {
+          dirs.addAll(
+              await getAllDirsInPath(file.path, showHidden: showHidden));
+        }
+      }
+    }
+
+    return dirs;
+  }
+
 
   static String formatTime(String iso) {
     DateTime date = DateTime.parse(iso);

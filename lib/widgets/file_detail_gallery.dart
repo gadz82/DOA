@@ -39,14 +39,14 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
   @override
   void initState() {
     currentIndex = widget.initialIndex;
-    fileName = basename(widget.galleryItems[widget.initialIndex].path);
+    fileName = basename(widget.galleryItems[widget.initialIndex].path).replaceAll(extension(widget.galleryItems[widget.initialIndex].path).toLowerCase(), '');
     super.initState();
   }
 
   void onPageChanged(int index) {
     setState(() {
       currentIndex = index;
-      fileName = basename(widget.galleryItems[index].path)??"";
+      fileName = basename(widget.galleryItems[index].path).replaceAll(extension(widget.galleryItems[index].path).toLowerCase(), '')??"";
     });
   }
 
@@ -104,19 +104,20 @@ class AppBarLayout extends StatelessWidget {
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Stack(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.topCenter,
           children: <Widget>[
             Flex(
               direction: Axis.vertical,
               children: [
                 Expanded(
-                child: child,
-              )]
+                  child: child,
+                )
+              ]
             ),
             AppBar(
               title: title,
               showGoBack: showGoBack,
-            )
+            ),
           ],
         ),
       ),

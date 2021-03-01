@@ -126,6 +126,7 @@ class _SettingsState extends State<Settings> {
             ),
             if(this.isLogged) SwitchListTile.adaptive(
               contentPadding: EdgeInsets.all(0),
+              activeTrackColor: Colors.red.withOpacity(0.50),
               secondary: Icon(
                 Feather.user,
               ),
@@ -139,9 +140,7 @@ class _SettingsState extends State<Settings> {
                 Provider.of<CategoryProvider>(context, listen: false)
                     .setAdminMode(value);
               },
-              activeColor: Theme
-                  .of(context)
-                  .accentColor,
+              activeColor: Colors.redAccent,
             ),
             if(this.isLogged) Container(
               height: 1,

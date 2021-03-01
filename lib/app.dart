@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:wanted/providers/providers.dart';
 import 'package:wanted/screens/ios_error.dart';
 import 'package:wanted/screens/splash.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return Consumer<AppProvider>(
       builder: (BuildContext context, AppProvider appProvider, Widget child) {
         return MaterialApp(
