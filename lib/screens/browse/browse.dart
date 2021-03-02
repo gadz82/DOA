@@ -28,7 +28,7 @@ class Browse extends StatelessWidget {
         }),
         actions: <Widget>[
           IconButton(
-            tooltip: "Search",
+            tooltip: "Ricerca",
             onPressed: () {
               showSearch(
                 context: context,

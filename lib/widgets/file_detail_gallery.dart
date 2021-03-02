@@ -100,7 +100,7 @@ class AppBarLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Colors.black,
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Stack(
@@ -142,7 +142,7 @@ class _AppBarState extends State<AppBar> {
       child: Container(
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
         decoration: BoxDecoration(
-            color: Theme.of(context).accentColor.withOpacity(0.30),
+            color: Theme.of(context).accentColor.withOpacity(0.40),
             boxShadow: <BoxShadow>[
               const BoxShadow(
                   color: Colors.black12, spreadRadius: 10.0, blurRadius: 20.0)

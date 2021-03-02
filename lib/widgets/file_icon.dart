@@ -37,15 +37,17 @@ class FileIcon extends StatelessWidget {
     } else {
       switch (type) {
         case "image":
-
+          FileImage img = FileImage(File(file.path));
           return AspectRatio(
             aspectRatio: this.itemWidth / this.itemHeight,
             child: new Container(
               decoration: new BoxDecoration(
                   image: new DecorationImage(
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.cover,
                     alignment: FractionalOffset.center,
-                    image: ResizeImage(FileImage(File(file.path)), width: this.itemWidth.round()),
+                    image: ResizeImage(img ,
+                        width: this.itemWidth.round()
+                    ),
                   )
               ),
             )
@@ -53,15 +55,7 @@ class FileIcon extends StatelessWidget {
 
           break;
         case "video":
-          return Container(
-            height: this.itemHeight,
-            width: this.itemWidth,
-            child: VideoThumbnail(
-              itemHeight : this.itemHeight,
-              itemWidth: this.itemWidth,
-              path: file.path,
-            ),
-          );
+          return Icon(Feather.video, size:60);
           break;
         case "audio":
           return Icon(Feather.music, color: Colors.blue, size: 60);
