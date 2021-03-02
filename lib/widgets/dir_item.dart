@@ -50,7 +50,7 @@ class DirectoryItem extends StatelessWidget {
       title: Text(
         "${basename(file.path)}",
         style: TextStyle(
-          fontSize: 14,
+          fontSize: 16,
         ),
         maxLines: 2,
       ),

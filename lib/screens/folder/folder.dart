@@ -72,6 +72,7 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
       }
 
       files = FileUtils.sortList(files, provider.sort);
+      directories = FileUtils.sortList(directories, provider.sort);
     } catch (e) {
       if (e.toString().contains("Permission denied")) {
         Dialogs.showToast("Permesso negato!");
