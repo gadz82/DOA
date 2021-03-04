@@ -1,12 +1,12 @@
 import 'dart:io';
-import 'package:wanted/widgets/video_thumbnail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:path/path.dart';
 
 class FileIcon extends StatelessWidget {
-  final FileSystemEntity file;
+
+  FileSystemEntity file;
   var itemHeight;
   var itemWidth;
   

@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:wanted/providers/providers.dart';
 import 'package:wanted/screens/folder/widgets/set_default_dialog.dart';
 import 'package:wanted/screens/folder/widgets/widgets.dart';
@@ -246,9 +244,7 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
                             path = file.path;
                             setState(() {});
                             getFiles();
-                          },
-                          itemHeight: itemHeight,
-                          itemWidth: itemWidth
+                          }
                         );
                       }
                       return FileItem(

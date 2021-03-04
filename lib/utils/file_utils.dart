@@ -1,3 +1,4 @@
+import 'dart:developer' as dev;
 import 'dart:io';
 import 'dart:math';
 
@@ -207,12 +208,19 @@ class FileUtils {
             ..sort((f1, f2) => basename(f1.path)
                 .toLowerCase()
                 .compareTo(basename(f2.path).toLowerCase()));
-          return list
-            ..sort((f1, f2) => f1
-                .toString()
-                .split(":")[0]
-                .toLowerCase()
-                .compareTo(f2.toString().split(":")[0].toLowerCase()));
+
+          list
+            ..sort((f1, f2){
+
+                return f1
+                  .toString()
+                  .split(":")[1]
+                  .toLowerCase()
+                  .compareTo(f2.toString().split(":")[1].toLowerCase());
+              }
+            );
+
+          return list;
         } else {
           return list
             ..sort((f1, f2) => basename(f1.path)
@@ -229,9 +237,9 @@ class FileUtils {
           list
             ..sort((f1, f2) => f1
                 .toString()
-                .split(":")[0]
+                .split(":")[1]
                 .toLowerCase()
-                .compareTo(f2.toString().split(":")[0].toLowerCase()));
+                .compareTo(f2.toString().split(":")[1].toLowerCase()));
         }
         return list.reversed.toList();
         break;

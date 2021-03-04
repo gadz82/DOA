@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:mime_type/mime_type.dart';
 import 'dart:io';
 import 'package:wanted/widgets/file_detail_gallery.dart';

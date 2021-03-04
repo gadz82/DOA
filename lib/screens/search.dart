@@ -1,9 +1,7 @@
 import 'dart:io';
 
 import 'package:wanted/providers/providers.dart';
-import 'package:wanted/screens/folder/folder.dart';
 import 'package:wanted/utils/utils.dart';
-import 'package:wanted/widgets/dir_item.dart';
 import 'package:wanted/widgets/file_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

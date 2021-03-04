@@ -1,7 +1,4 @@
 import 'dart:io';
-
-import 'package:provider/provider.dart';
-import 'package:wanted/providers/category_provider.dart';
 import 'package:wanted/widgets/dir_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -11,16 +8,14 @@ class DirectoryItem extends StatelessWidget {
   final FileSystemEntity file;
   final Function tap;
   final Function popTap;
-  final itemHeight;
-  final itemWidth;
+
 
   DirectoryItem({
     Key key,
     @required this.file,
     @required this.tap,
-    @required this.popTap,
-    @required this.itemWidth,
-    @required this.itemHeight,
+    @required this.popTap
+
   }) : super(key: key);
 
   @override
