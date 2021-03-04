@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:mime_type/mime_type.dart';
 import 'dart:io';
 import 'package:wanted/widgets/file_detail_gallery.dart';
@@ -85,7 +87,7 @@ class FileItem extends StatelessWidget {
                                 ])),
                         child: Padding(
                             padding: EdgeInsets.all(5),
-                            child: Text(basename(file.path).replaceAll(extension(file.path).toLowerCase(), ''),overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color:Theme.of(context).appBarTheme.textTheme.headline6.color), textAlign: TextAlign.left)
+                            child: Text(basename(file.path).replaceAll(extension(file.path), ''),overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color:Theme.of(context).appBarTheme.textTheme.headline6.color), textAlign: TextAlign.left)
                         ),
                       )
 

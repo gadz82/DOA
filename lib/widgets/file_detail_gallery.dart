@@ -40,14 +40,14 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
   @override
   void initState() {
     currentIndex = widget.initialIndex;
-    fileName = basename(widget.galleryItems[widget.initialIndex].path).replaceAll(extension(widget.galleryItems[widget.initialIndex].path).toLowerCase(), '');
+    fileName = basename(widget.galleryItems[widget.initialIndex].path).replaceAll(extension(widget.galleryItems[widget.initialIndex].path), '');
     super.initState();
   }
 
   void onPageChanged(int index) {
     setState(() {
       currentIndex = index;
-      fileName = basename(widget.galleryItems[index].path).replaceAll(extension(widget.galleryItems[index].path).toLowerCase(), '')??"";
+      fileName = basename(widget.galleryItems[index].path).replaceAll(extension(widget.galleryItems[index].path), '')??"";
     });
   }
 
